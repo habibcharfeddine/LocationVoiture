@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>acceuil</class>
+ <widget class="QWidget" name="acceuil">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="habib">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>430</y>
+     <width>430</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Century Gothic</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	border-width: 2px; border-radius: 4px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+
+padding: 5px;
+background-color:#d39cff;
+font-weight: bold;
+}</string>
+   </property>
+   <property name="text">
+    <string>GESTION DES ASSURANCES ET DES SOCIETES</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="marwa">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>160</y>
+     <width>430</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Century Gothic</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	border-width: 2px; border-radius: 4px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+
+padding: 5px;
+background-color:#d39cff;
+font-weight: bold;
+}</string>
+   </property>
+   <property name="text">
+    <string>GESTION DES CLIENTS ET DES AVIS CLIENTS</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="sourour">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>250</y>
+     <width>430</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Century Gothic</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	border-width: 2px; border-radius: 4px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+
+padding: 5px;
+background-color:#d39cff;
+font-weight: bold;
+}</string>
+   </property>
+   <property name="text">
+    <string>GESTION DES VOITURES ET DES PARKINGS</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mahdi">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>70</y>
+     <width>430</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Century Gothic</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	border-width: 2px; border-radius: 4px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+
+padding: 5px;
+background-color:#d39cff;
+font-weight: bold;
+}</string>
+   </property>
+   <property name="text">
+    <string>GESTION DES LOCATIONS ET DES POINTS DE FIDELITES</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="obaid">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>520</y>
+     <width>430</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Century Gothic</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	border-width: 2px; border-radius: 4px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+
+padding: 5px;
+background-color:#d39cff;
+font-weight: bold;
+}</string>
+   </property>
+   <property name="text">
+    <string>GESTION DES EVENNEMENTS ET DES PROMOTIONS</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ahmed">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>340</y>
+     <width>430</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Century Gothic</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	border-width: 2px; border-radius: 4px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+
+padding: 5px;
+background-color:#d39cff;
+font-weight: bold;
+}
+</string>
+   </property>
+   <property name="text">
+    <string>GESTION DES PERSONNELS ET DES DEPARTEMENTS</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="logout">
+   <property name="geometry">
+    <rect>
+     <x>1090</x>
+     <y>620</y>
+     <width>141</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Century Gothic</family>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	border-width: 2px; border-radius: 4px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+padding: 5px;
+background-color:#d39cff;
+font-weight: bold;
+}</string>
+   </property>
+   <property name="text">
+    <string>DECONNEXION</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pic">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1281</width>
+     <height>721</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>pic</zorder>
+  <zorder>habib</zorder>
+  <zorder>marwa</zorder>
+  <zorder>sourour</zorder>
+  <zorder>mahdi</zorder>
+  <zorder>obaid</zorder>
+  <zorder>ahmed</zorder>
+  <zorder>logout</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

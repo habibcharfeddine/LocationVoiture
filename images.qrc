@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/acceuil.png</file>
+        <file>icons/societe.png</file>
+        <file>icons/assurance.png</file>
+        <file>icons/add.png</file>
+        <file>icons/manage.png</file>
+        <file>icons/location.png</file>
+        <file>icons/ptsfidelites.png</file>
+        <file>icons/carrent.png</file>
+        <file>icons/Parking.png</file>
+        <file>icons/event.png</file>
+        <file>icons/promo.png</file>
+        <file>icons/client.png</file>
+        <file>icons/pngwing.com.png</file>
+        <file>icons/departement.png</file>
+        <file>icons/personnel.png</file>
+    </qresource>
+</RCC>
