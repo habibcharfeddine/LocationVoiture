@@ -41,11 +41,15 @@ SOURCES += \
     GUI_LocationPointsF.cpp \
     GUI_PersonnelDepart.cpp \
     GUI_VoitureParking.cpp \
+    Location.cpp \
+    LocationAjout.cpp \
     LocationGestion.cpp \
     Personnel.cpp \
     PersonnelAfficher.cpp \
     PersonnelAjout.cpp \
     PersonnelGestion.cpp \
+    Point.cpp \
+    PointAjout.cpp \
     PointsGestion.cpp \
     PromoGestion.cpp \
     Societe.cpp \
@@ -91,11 +95,15 @@ HEADERS += \
     GUI_LocationPointsF.h \
     GUI_PersonnelDepart.h \
     GUI_VoitureParking.h \
+    Location.h \
+    LocationAjout.h \
     LocationGestion.h \
     Personnel.h \
     PersonnelAfficher.h \
     PersonnelAjout.h \
     PersonnelGestion.h \
+    Point.h \
+    PointAjout.h \
     PointsGestion.h \
     PromoGestion.h \
     Societe.h \
@@ -141,10 +149,12 @@ FORMS += \
     GUI_LocationsPointsF.ui \
     GUI_PersonnelDepart.ui \
     GUI_VoitureParking.ui \
+    LocationAjout.ui \
     LocationGestion.ui \
     PersonnelAfficher.ui \
     PersonnelAjout.ui \
     PersonnelGestion.ui \
+    PointAjout.ui \
     PointsGestion.ui \
     PromoGestion.ui \
     SocieteAfficher.ui \
