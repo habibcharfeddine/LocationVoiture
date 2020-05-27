@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <QMessageBox>
 #include <QApplication>
 #include"GUI_AssuranceSociete.h"
 #include"connexion.h"

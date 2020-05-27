@@ -6,7 +6,8 @@
 
 QT       += core gui network  printsupport
 QT       +=sql
-QT += widgets multimedia serialport
+QT       += core gui sql charts network
+QT       += core gui multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,10 +27,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    AVIS_CLIENT.cpp \
     Assurance.cpp \
     AssuranceAfficher.cpp \
     AssuranceAjout.cpp \
     AssuranceGestion.cpp \
+    CLIENT.cpp \
+    ClientAvis.cpp \
     Departement.cpp \
     DepartementAfficher.cpp \
     DepartementAjout.cpp \
@@ -58,6 +62,7 @@ SOURCES += \
     SocieteGestion.cpp \
     VoitureParking.cpp \
     acceuil.cpp \
+    capture.cpp \
         main.cpp \
         mainwindow.cpp \
     connexion.cpp \
@@ -75,15 +80,19 @@ SOURCES += \
     src/mimetext.cpp \
     src/quotedprintable.cpp \
     src/smtpclient.cpp \
+    statistique.cpp \
     stmp.cpp \
     voiture.cpp
 
 
 HEADERS += \
+    AVIS_CLIENT.h \
     Assurance.h \
     AssuranceAfficher.h \
     AssuranceAjout.h \
     AssuranceGestion.h \
+    CLIENT.h \
+    ClientAvis.h \
     Departement.h \
     DepartementAfficher.h \
     DepartementAjout.h \
@@ -112,6 +121,7 @@ HEADERS += \
     SocieteGestion.h \
     VoitureParking.h \
     acceuil.h \
+    capture.h \
         mainwindow.h \
     connexion.h \
     parking.h \
@@ -131,6 +141,7 @@ HEADERS += \
     src/quotedprintable.h \
     src/smtpclient.h \
     src/smtpexports.h \
+    statistique.h \
     stmp.h \
     voiture.h
 
@@ -139,6 +150,7 @@ FORMS += \
     AssuranceAfficher.ui \
     AssuranceAjout.ui \
     AssuranceGestion.ui \
+    ClientAvis.ui \
     DepartementAfficher.ui \
     DepartementAjout.ui \
     DepartementGestion.ui \
@@ -162,7 +174,9 @@ FORMS += \
     SocieteGestion.ui \
     VoitureParking.ui \
     acceuil.ui \
-        mainwindow.ui
+    capture.ui \
+        mainwindow.ui \
+    statistique.ui
 
 RESOURCES += \
     images.qrc

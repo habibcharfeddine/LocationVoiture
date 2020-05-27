@@ -1,0 +1,5 @@
+
+ client a été ajoutée sous le prenom :aaa et sous le nom : aaa
+ client a été ajoutée sous le prenom :ccc et sous le nom : ccc
+ client a été ajoutée sous le prenom :MMMM et sous le nom : MMMM
+ client a été ajoutée sous le prenom :ZZZZZZ et sous le nom : QQQQQQQ
