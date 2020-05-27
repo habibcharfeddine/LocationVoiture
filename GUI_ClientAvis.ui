@@ -37,7 +37,7 @@
   <widget class="QPushButton" name="entraineurs">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>320</x>
      <y>130</y>
      <width>171</width>
      <height>161</height>
@@ -48,7 +48,7 @@
    </property>
    <property name="icon">
     <iconset resource="images.qrc">
-     <normaloff>:/icons/client.png</normaloff>:/icons/client.png</iconset>
+     <normaloff>:/icons/manage.png</normaloff>:/icons/manage.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -57,33 +57,10 @@
     </size>
    </property>
   </widget>
-  <widget class="QPushButton" name="joueurs">
-   <property name="geometry">
-    <rect>
-     <x>460</x>
-     <y>130</y>
-     <width>171</width>
-     <height>161</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="images.qrc">
-     <normaloff>:/icons/pngwing.com.png</normaloff>:/icons/pngwing.com.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>200</width>
-     <height>200</height>
-    </size>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>220</x>
+     <x>340</x>
      <y>300</y>
      <width>141</width>
      <height>51</height>
@@ -96,26 +73,7 @@
     </font>
    </property>
    <property name="text">
-    <string>CLIENTS</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>470</x>
-     <y>300</y>
-     <width>141</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Century Gothic</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>AVIS CLIENTS</string>
+    <string>TRAITER</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">

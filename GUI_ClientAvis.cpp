@@ -1,6 +1,6 @@
 #include "GUI_ClientAvis.h"
 #include "ui_GUI_ClientAvis.h"
-#include "AssuranceGestion.h"
+#include "ClientAvis.h"
 #include "SocieteGestion.h"
 #include "mainwindow.h"
 GUI_ClientAvis::GUI_ClientAvis(QWidget *parent) :
@@ -18,20 +18,14 @@ GUI_ClientAvis::~GUI_ClientAvis()
 void GUI_ClientAvis::on_entraineurs_clicked()
 {
 
-    Gestion_Societe *w = new Gestion_Societe;
+    ClientAvis *w = new ClientAvis;
     hide();
     w->show();
 }
 
 
 
-void GUI_ClientAvis::on_joueurs_clicked()
-{
 
-    Gestion_Assurance *w = new Gestion_Assurance;
-    hide();
-    w->show();
-}
 
 void GUI_ClientAvis::on_pushButton_clicked()
 {
