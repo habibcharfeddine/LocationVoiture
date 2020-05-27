@@ -1,0 +1,69 @@
+#include "AVIS_CLIENT.h"
+#include <QString>
+#include <QDate>
+
+AVIS_CLIENT::AVIS_CLIENT()
+{
+
+}
+AVIS_CLIENT::AVIS_CLIENT(int Id_AVIS,QString AVIS_client,QDate DateAVIS,int CIN)
+{
+  this->Id_AVIS=Id_AVIS;
+  this->AVIS_client=AVIS_client;
+  this->DateAVIS=DateAVIS;
+  this->CIN = CIN;
+}
+QString AVIS_CLIENT::get_AVIS_client(){return  AVIS_client;}
+QDate AVIS_CLIENT::get_DateAVIS(){return DateAVIS;}
+int AVIS_CLIENT::get_Id_AVIS(){return  Id_AVIS;}
+int AVIS_CLIENT::get_CIN(){return  CIN;}
+
+bool AVIS_CLIENT::ajouter()
+{
+QSqlQuery query;
+QString res= QString::number(Id_AVIS);
+//query.prepare("INSERT INTO AVIS_CLIENT (Id_AVIS, AVIS_client, DateAVIS, CIN) "
+//                    "VALUES (:Id_AVIS, :AVIS_client, :DateAVIS, :CIN)");
+
+query.prepare("INSERT INTO AVIS_CLIENT (Id_AVIS, AVIS_client, CIN) "
+                   "VALUES (:Id_AVIS, :AVIS_client, :CIN)");
+query.bindValue(":Id_AVIS", res);
+query.bindValue(":AVIS_client", AVIS_client);
+//query.bindValue(":DateAVIS", DateAVIS);
+query.bindValue(":CIN", CIN);
+
+return    query.exec();
+}
+bool AVIS_CLIENT::modifier()
+{
+QSqlQuery query;
+QString res= QString::number(Id_AVIS);
+query.prepare("update AVIS_CLIENT set AVIS_client = :AVIS_client , DateAVIS = :DateAVIS , CIN = :CIN where Id_AVIS = :Id_AVIS");
+query.bindValue(":Id_AVIS", res);
+query.bindValue(":AVIS_client", AVIS_client);
+query.bindValue(":DateAVIS", DateAVIS);
+query.bindValue(":CIN", CIN);
+
+return    query.exec();
+}
+
+
+QSqlQueryModel * AVIS_CLIENT::afficher()
+{QSqlQueryModel * model= new QSqlQueryModel();
+
+model->setQuery("select * from AVIS_CLIENT");
+model->setHeaderData(0, Qt::Horizontal, QObject::tr("Id_AVIS"));
+model->setHeaderData(1, Qt::Horizontal, QObject::tr("AVIS_client "));
+model->setHeaderData(2, Qt::Horizontal, QObject::tr("AVIS_client"));
+    return model;
+}
+
+bool AVIS_CLIENT::supprimer(int Id_AVISd)
+{
+QSqlQuery query;
+QString res= QString::number(Id_AVISd);
+query.prepare("Delete from AVIS_CLIENT where Id_AVIS = :Id_AVIS ");
+query.bindValue(":Id_AVIS", res);
+return    query.exec();
+}
+

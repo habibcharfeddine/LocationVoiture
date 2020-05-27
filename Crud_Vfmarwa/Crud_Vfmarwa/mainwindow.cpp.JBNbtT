@@ -1,0 +1,530 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "CLIENT.h"
+#include "AVIS_CLIENT.h"
+#include "qcustomplot.h"
+#include <QMessageBox>
+#include "smtp.h"
+#include <QString>
+#include <QDate>
+
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    //ui->setupUi(this);
+    ui->setupUi(this);
+    ui->tabetudiant->setModel(tmpCLIENT.afficher_Clist());
+    ui->listeclient->setModel(tmpCLIENT.afficher_Clist());//refreche combobox choix +refreche tableaux
+    ui->tabetudiant_2->setModel(tmpAVIS_CLIENT.afficher());
+    ui->lineEdit_CIN->setEnabled(1);//t5alik mil lawel tnajem tekteb fih 3adi
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+void MainWindow::initClient()
+{
+    ui->lineEdit_CIN->clear();
+      ui->lineEdit_NOM->clear();
+        ui->lineEdit_PRENOM->clear();
+        ui->lineEdit_Email_client->clear();
+         ui->lineEdit_adress_client->clear();
+       ui->dateEdit_ajout_client ->clear();
+        ui->chemin->clear();
+        ui->photo->clear();
+        ui->lineEdit_recherche->clear();
+
+}
+
+//partie client
+
+
+//bouton ajouter client
+void MainWindow::on_pb_ajouter_clicked()
+{
+    int CIN = ui->lineEdit_CIN->text().toInt();
+    QString NOM= ui->lineEdit_NOM->text();
+    QString PRENOM= ui->lineEdit_PRENOM->text();
+    QString EMAIL= ui->lineEdit_Email_client->text();
+    QString ADRESS= ui->lineEdit_adress_client->text();
+    QDate DATENAISSANCE= ui->lineEdit_adress_client->text();
+    QString IMAGE= ui->chemin->text();
+    QDate DATE_DEBUT= ui->dateEdit_ajout_client ->date();
+    int AGE = ui->lineEdit_adress_client_2->text().toInt();
+ui->lineEdit_CIN->setEnabled(1);
+    CLIENT e(CIN, NOM , PRENOM, EMAIL, DATENAISSANCE, ADRESS,IMAGE, DATE_DEBUT, AGE);
+
+    if(e.verif_EMAIL(e.get_EMAIL())==false){
+        QMessageBox::critical(nullptr, QObject::tr("Ajouter Client"),
+                              QObject::tr("verifier Mail !\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }else if(e.verif_CIN(e.get_CIN())==false){
+        QMessageBox::critical(nullptr, QObject::tr("Ajouter Client"),
+                              QObject::tr(" CIN doit contenir 8 chiffres !\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+
+
+    }else if(e.verif_NOM(e.get_NOM())==false){
+        QMessageBox::critical(nullptr, QObject::tr("Ajouter Client"),
+                              QObject::tr(" Nom doit contenir 20 caractéres !\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }else if(e.verif_NOM(e.get_PRENOM())==false){
+        QMessageBox::critical(nullptr, QObject::tr("Ajouter Client"),
+                              QObject::tr(" Prenom doit contenir 20 caractéres !\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
+    else{
+        bool test=e.ajouter();
+        if(test)
+        { QFile file("C:\\Users\\ASUS\\Downloads\\Crud_Vfmarwa\\HistoriqueClient.txt");
+            if (!file.open(QIODevice::WriteOnly | QIODevice::Append |QIODevice::Text))
+                return;
+            QTextStream cout(&file);
+            QString message2="\n client a été ajoutée sous le prenom :"+PRENOM+" et sous le nom : "+NOM+"";
+            cout << message2;
+initClient();//t5alilek les line edit yofor8ou ba3ed mma t3amer
+            ui->tabetudiant->setModel(tmpCLIENT.afficher_Clist());//refresh
+            ui->listeclient->setModel(tmpCLIENT.afficher_Clist());
+            QMessageBox::information(nullptr, QObject::tr("Ajouter CLIENT"),
+                                     QObject::tr("CLIENT ajouté.\n"
+                                                 "Click Cancel to exit."), QMessageBox::Cancel);
+
+        }
+        else
+            QMessageBox::critical(nullptr, QObject::tr("Ajouter client"),
+                                  QObject::tr("Erreur !.\n"
+                                              "Click Cancel to exit."), QMessageBox::Cancel);
+
+
+    }
+}
+//bouton supprimer client
+void MainWindow::on_pb_supprimer_clicked()
+{
+    int CIN = ui->lineEdit_CIN->text().toInt();
+    bool test=tmpCLIENT.supprimer(CIN);
+    if(test)
+    {ui->tabetudiant->setModel(tmpCLIENT.afficher_Clist());//refresh
+        ui->lineEdit_CIN->setEnabled(1);
+        ui->listeclient->setModel(tmpCLIENT.afficher_Clist());
+        initClient();//t5alilek les line edlit yofor5ou ba3ed ma tsuprimie
+        QMessageBox::information(nullptr, QObject::tr("Supprimer CLIENT"),
+                                 QObject::tr("CLIENT supprimé.\n"
+                                             "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
+    else
+        QMessageBox::critical(nullptr, QObject::tr("Supprimer CLIENT"),
+                              QObject::tr("Erreur !.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+
+
+}
+//bouton afficher client
+void MainWindow::on_pushButton_1_clicked()
+{
+    ui->tabetudiant->setModel(tmpCLIENT.afficher_Clist());
+    ui->listeclient->setModel(tmpCLIENT.afficher_Clist());//refreche combobox choix +refreche tableaux
+    initClient();
+}
+
+
+
+//bouton modifier client
+void MainWindow::on_pb_ajouter_3_clicked()
+{
+    int CIN = ui->lineEdit_CIN->text().toInt();
+    QString NOM= ui->lineEdit_NOM->text();
+    QString PRENOM= ui->lineEdit_PRENOM->text();
+    QString EMAIL= ui->lineEdit_Email_client->text();
+    QString ADRESS= ui->lineEdit_adress_client->text();
+    QString DATENAISSANCE= ui->lineEdit_adress_client->text();
+    QString IMAGE= ui->chemin->text();
+    QDate DATE_DEBUT= ui->dateEdit_ajout_client ->date();
+    int AGE = ui->lineEdit_adress_client_2->text().toInt();
+
+
+    CLIENT e(CIN, NOM, PRENOM,EMAIL,DATENAISSANCE,ADRESS ,IMAGE , DATE_DEBUT ,int AGE);
+    bool test=e.modifier();
+    if(test)
+    {ui->tabetudiant->setModel(tmpCLIENT.afficher_Clist());//refresh
+        ui->listeclient->setModel(tmpCLIENT.afficher_Clist());
+        ui->lineEdit_CIN->setEnabled(1);
+        initClient();
+        QMessageBox::information(nullptr, QObject::tr("Modifier client"),
+                                 QObject::tr("CLIENT modifié.\n"
+                                             "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
+    else
+        QMessageBox::critical(nullptr, QObject::tr("Modifier client"),
+                              QObject::tr("Erreur !.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+}
+//triez ordre croissant mail
+void MainWindow::on_radioButton_8_clicked()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+
+    model->setQuery("select * from CLIENT ORDER BY EMAIL");
+
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM "));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRENOM"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("EMAIL"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATENAISSANCE"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("ADRESS"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("AGE"));
+
+    ui->tabetudiant->setModel(model) ;
+}
+//trier ordre croissant avis client
+void MainWindow::on_radioButton_18_clicked()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+
+    model->setQuery("select * from AVIS_CLIENT ORDER BY ID_AVIS ");
+
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_AVIS"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("AVISCLIENT"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Date DATEAVIS"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("CIN"));
+    ui->tabetudiant->setModel(model) ;
+}
+// tri dans ordre croissent
+void MainWindow::on_radioButton_17_clicked()
+{
+
+        QSqlQueryModel * model= new QSqlQueryModel();
+
+        model->setQuery("select * from AVIS_CLIENT ORDER BY ID_AVIS  desc");
+        model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_AVIS"));
+        model->setHeaderData(1, Qt::Horizontal, QObject::tr("AVISCLIENT"));
+        model->setHeaderData(2, Qt::Horizontal, QObject::tr("Date DATEAVIS"));
+        model->setHeaderData(3, Qt::Horizontal, QObject::tr("CIN"));
+
+        ui->tabetudiant->setModel(model) ;
+
+}
+//trier ordre croissant cin
+void MainWindow::on_radioButton_5_clicked()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+
+    model->setQuery("select * from CLIENT ORDER BY CIN");
+
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM "));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRENOM"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("EMAIL"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATENAISSANCE"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("ADRESS"));
+
+    ui->tabetudiant->setModel(model) ;
+}
+//trrier selon ordre decroissant cin
+void MainWindow::on_radioButton_9_clicked()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+
+    model->setQuery("select * from CLIENT ORDER BY CIN desc");
+
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM "));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRENOM"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("EMAIL"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATENAISSANCE"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("ADRESS"));
+
+    ui->tabetudiant->setModel(model) ;
+}
+//trier selon nom croissant
+void MainWindow::on_radioButton_3_clicked()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+
+    model->setQuery("select * from CLIENT ORDER BY NOM ");
+
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM "));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRENOM"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("EMAIL"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATENAISSANCE"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("ADRESS"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("AGE"));
+    ui->tabetudiant->setModel(model) ;
+}
+//trier selon nom decroissant
+void MainWindow::on_radioButton_4_clicked()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+
+    model->setQuery("select * from CLIENT ORDER BY NOM desc");
+
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM "));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRENOM"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("EMAIL"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATENAISSANCE"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("ADRESS"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("AGA"));
+
+    ui->tabetudiant->setModel(model) ;
+}
+
+
+//bouton chercher client
+void MainWindow::on_pushButton_10_clicked()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+    QSqlQuery q;
+    q.prepare("select * from CLIENT where PRENOM like '"+ui->lineEdit_recherche->text()+"' OR NOM like '"+ui->lineEdit_recherche->text()+"'  ");
+    //select mi table il valeur eli mawjouda il lineedit recherche w valeur nom w prenom
+    tmpCLIENT.rechercher(q) ;
+    q.exec();
+    model->setQuery(q);
+    ui->tabetudiant->setModel(tmpCLIENT.rechercher(q)) ;
+    ui->lineEdit_recherche->clear();
+   // ui->label_3->setText("Chercher");
+}
+
+//ouvrir historique client
+void MainWindow::on_pushButton_7_clicked()
+{
+    QFile file ("C:\\Users\\ASUS\\Downloads\\Crud_Vfmarwa\\HistoriqueClient.txt");//tbadel i chemin
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::information(0,"info",file.errorString());
+    }
+    QTextStream in (&file);
+    ui->textBrowser->setText(in.readAll());
+}
+//imprimer historique client
+void MainWindow::on_pushButton_8_clicked()
+{
+    QPrinter printer;
+    printer.setPrinterName("desierd printer name");
+    QPrintDialog dialog(&printer,this);
+    if(dialog.exec()== QDialog::Rejected) return;
+    ui->textBrowser->print(&printer);
+}
+//bouton ajouter image
+void MainWindow::on_pushButton_2_clicked()
+{QString filename = QFileDialog::getOpenFileName(this,tr("choose"), "" , tr("image (*.png *.jpg *.jpeg *.bmp *.gif)"));
+    if ( QString::compare(filename, QString()) != 0 )
+    {
+        QImage image;
+        bool valid =image.load(filename);
+        if (valid)
+        {
+            ui->chemin->setText(filename);
+            image =image.scaledToWidth(ui->photo->width(),Qt::SmoothTransformation);
+            ui->photo->setPixmap(QPixmap::fromImage(image));
+        }
+
+    }
+
+}
+//bouton fenetre capture image
+void MainWindow::on_pushButton_3_clicked()
+{
+    c=new capture (this);
+    c->show();
+}
+//bouton modifier image
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,tr("choose"), "" , tr("image (*.png *.jpg *.jpeg *.bmp *.gif)"));
+    if ( QString::compare(filename, QString()) != 0 )
+    {
+        QImage image;
+        bool valid =image.load(filename);
+        if (valid)
+        {
+            ui->chemin->setText(filename);
+            image =image.scaledToWidth(ui->photo->width(),Qt::SmoothTransformation);
+            ui->photo->setPixmap(QPixmap::fromImage(image));
+        }
+
+    }
+}
+//bouton choix client
+void MainWindow::on_pushButton_5_clicked()
+{
+
+    QString val=ui->listeclient->currentText()  ;
+    QSqlQuery query ;
+    query.prepare("select * from CLIENT where CIN='"+val+"'") ;
+
+    if (query.exec())
+    {
+        while (query.next()) {
+
+            ui->lineEdit_CIN->setText(query.value(0).toString()) ;
+             ui->lineEdit_CIN->setDisabled(1);
+            ui->lineEdit_NOM->setText(query.value(1).toString()) ;
+            ui->lineEdit_PRENOM->setText(query.value(2).toString()) ;
+            ui->lineEdit_Email_client->setText(query.value(3).toString()) ;
+            ui->dateEdit_ajout_client->setDate(query.value(4).toDate()) ;
+            ui->lineEdit_adress_client->setText(query.value(5).toString()) ;
+            ui->chemin->setText(query.value(6).toString()) ;
+             ui->lineEdit_adress_client_2->setText(query.value(7).toString()) ;
+            QPixmap pix(ui->chemin->text());
+            int w =ui->photo->width();
+            int h =ui->photo->height();
+            ui->photo->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
+        }
+    }
+}
+//partie avis client
+
+/*void MainWindow::on_pb_ajouter_4_clicked()
+{
+    int Id_AVIS = ui->lineEdit_Id_AVIS_3->text().toInt();
+    QString AVIS_client= ui->lineEdit_AVIS_client_2->text();
+    QDate Date_AVIS= ui->dateEdit->date();
+    int CIN= ui->lineEdit_CIN_2->text().toInt();
+
+    AVIS_CLIENT e(Id_AVIS ,AVIS_client,Date_AVIS, CIN);
+    bool test=e.modifier();
+    if(test)
+    {ui->tabetudiant_2->setModel(tmpAVIS_CLIENT.afficher());//refresh
+        QMessageBox::information(nullptr, QObject::tr("Modifier avis client"),
+                                 QObject::tr("avis client modifié.\n"
+                                             "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
+    else
+        QMessageBox::critical(nullptr, QObject::tr("Modifier avis client"),
+                              QObject::tr("Erreur !.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+void MainWindow::on_pb_ajouter_5_clicked()
+{
+    int Id_AVIS = ui->lineEdit_Id_AVIS_3->text().toInt();
+    QString AVIS_client= ui->lineEdit_AVIS_client_2->text();
+    QDate Date_AVIS= ui->dateEdit->date();
+    int CIN= ui->lineEdit_CIN_2->text().toInt();
+
+    AVIS_CLIENT e(Id_AVIS ,AVIS_client ,Date_AVIS, CIN);
+    if(e.verif_CIN(e.get_ID_AVIS())==false){
+        QMessageBox::critical(nullptr, QObject::tr("Ajouter avis client"),
+                              QObject::tr(" Id_AVIS doit contenir 8 chiffres !.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+
+    else if(e.verif_CIN(e.get_CIN())==false){
+        QMessageBox::critical(nullptr, QObject::tr("Ajouter avis client"),
+                              QObject::tr(" CIN doit contenir 8 chiffres !.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+    else{
+        bool test=e.ajouter();
+        if(test)
+        {ui->tabetudiant_2->setModel(tmpAVIS_CLIENT.afficher());//refresh
+
+            QMessageBox::information(nullptr, QObject::tr("Ajouter avis client"),
+                                     QObject::tr("AVIS CLIENT ajouté.\n"
+                                                 "Click Cancel to exit."), QMessageBox::Cancel);
+
+        }
+        else
+            QMessageBox::critical(nullptr, QObject::tr("Ajouter avis client"),
+                                  QObject::tr("Erreur !.\n"
+                                              "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
+}
+void MainWindow::on_pb_supprimer_2_clicked()
+{
+    int Id_AVIS = ui->lineEdit_Id_AVIS_3->text().toInt();
+    bool test=tmpAVIS_CLIENT.supprimer(Id_AVIS);
+    if(test)
+    {ui->tabetudiant_2->setModel(tmpAVIS_CLIENT.afficher());//refresh
+        QMessageBox::information(nullptr, QObject::tr("Supprimer avis client"),
+                                 QObject::tr("avis client supprimé.\n"
+                                             "Click Cancel to exit."), QMessageBox::Cancel);
+
+  }
+    else
+        QMessageBox::critical(nullptr, QObject::tr("Supprimer avis client"),
+                              QObject::tr("Erreur !.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+
+
+}
+
+
+
+
+
+//bouton modifier avis client
+void MainWindow::on_pb_ajouter_6_clicked()
+{
+    int Id_AVIS = ui->lineEdit_Id_AVIS_3->text().toInt();
+    QString AVIS_client= ui->lineEdit_AVIS_client_2->text();
+    QDate Date_AVIS= ui->dateEdit->date();
+    int CIN= ui->lineEdit_CIN_2->text().toInt();
+
+
+    AVIS_CLIENT e(Id_AVIS ,AVIS_client ,Date_AVIS, CIN);
+    bool test=e.modifier();
+    if(test)
+    {ui->tabetudiant->setModel(tmpAVIS_CLIENT.afficher());//refresh
+        ui->listeclient->setModel(tmpAVIS_CLIENT.afficher());
+        ui->lineEdit_CIN->setEnabled(1);
+        initClient();
+        QMessageBox::information(nullptr, QObject::tr("Modifier avis client"),
+                                 QObject::tr("avis CLIENT modifié.\n"
+                                             "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
+    else
+        QMessageBox::critical(nullptr, QObject::tr("Modifier avis client"),
+                              QObject::tr("Erreur !.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+}
+
+ //bouton afficher AVIS client
+void MainWindow::on_pushButton_22_clicked()
+
+    {
+        ui->tabetudiant->setModel(tmpAVIS_CLIENT.afficher());
+        ui->listeclient->setModel(tmpAVIS_CLIENT.afficher());//refreche combobox choix +refreche tableaux
+        initClient();
+    }
+//bouton chercher  avis client
+void MainWindow::on_pushButton_21_clicked()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+    QSqlQuery q;
+    q.prepare("select * from AVIS_CLIENT where ID_AVIS like '"+ui->lineEdit_Id_AVIS_3->text()+"' OR AVIS_CLIENT like '"+ui->lineEdit_AVIS_client_2->text()+"'  ");
+    //select mi table il valeur eli mawjouda il lineedit recherche w valeur nom w prenom
+   tmpAVIS_CLIENT.rechercher_avis(q) ;
+    q.exec();
+    model->setQuery(q);
+    ui->tabetudiant_2->setModel(tmpAVIS_CLIENT.rechercher_avis(q)) ;
+    ui->lineEdit_recherche_3->clear();
+   // ui->label_3->setText("Chercher");
+}
+
+
